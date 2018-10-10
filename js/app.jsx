@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.preventDefault();
 
-            if(this.questionInput.value!=="") {
+            if (this.questionInput.value !== "") {
                 const newData = {
                     "question": this.questionInput.value,
                     "type": this.typeInput.value, sublist: this.props.sublist
@@ -29,25 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     questions: [...this.state.questions, newData]
                 })
             }
-            else{
+            else {
                 alert("you must type in question!")
             }
         };
 
-// TODO: przenieść przez props do rodzica i tam usunac, to samo dla sublisty
-        handleDelete =(index)=>{
-            index.preventDefault();
-           console.log(index)
-
+        handleDelete = (e) => {
+            e.preventDefault();
+            this.props.deleteInput(this.props.index);
         }
-
 
         render() {
             console.log(this.state.questions);
 
-            let newList = this.state.questions.map(function (elem, index) {
+            let newList = this.state.questions.map(function (elem, i) {
 
-                return <SubInput key={index} index={index} />
+                return <SubInput key={i} index={i}/>
 
             });
 
@@ -72,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 onClick={this.handleAddNew}>Add Sub-Input
                             </button>
                             <button
-                                onClick={this.handleDelete}>Delete</button>
+                                onClick={this.handleDelete}>Delete
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -101,7 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         };
 
-        render() {           console.log(this.state.subQuestions);
+        render() {
+            console.log(this.state.subQuestions);
 
             let newSubList = this.state.subQuestions.map(function (elem, index) {
 
@@ -150,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class App extends React.Component {
 
+
         constructor(props) {
             super(props);
 
@@ -158,7 +158,16 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
-        handleAddnewInput = (e) => {
+
+        handleDeleteInput = (elem, i) => {
+            let arr = this.state.inputs;
+            arr.splice(i, 1);
+            this.setState({
+                inputs: arr
+            })
+        }
+
+        handleAddnewInput = (e, i) => {
             e.preventDefault();
             const newData = e;
 
@@ -168,15 +177,16 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         render() {
+            console.log(this.state.inputs);
+            let inputs = this.state.inputs.map((elem, i)=> {
 
-            let inputs = this.state.inputs.map(function (elem, index) {
-
-                return <Input key={index}/>
-
+                return <Input key={i} index={i}
+                deleteInput={this.handleDeleteInput}/>
             });
+
             return <div className="container">
                 <h3> Form Builder</h3>
-                    {inputs}
+                {inputs}
                 <button className="addInput"
                         onClick={this.handleAddnewInput}>Add Input
                 </button>
