@@ -9,31 +9,32 @@ document.addEventListener('DOMContentLoaded', () => {
             super(props);
 
             this.state = {
-                questions: [{"question": "none"}]
+                questions: []
             };
         }
 
 
         handleAddNew = (e) => {
+
             e.preventDefault();
-            const newData = {"question": this.questionInput.value};
+            const newData = {"question": this.questionInput.value,
+            "type":this.typeInput.value};
             this.setState({
                 questions: [...this.state.questions, newData]
             })
         };
 
-        handleAddNewSub = (e) => {
-            e.preventDefault();
-            const newData = {"question": this.questionInput.value};
-            this.setState({
-                questions: [...this.state.questions, newData]
-            })
-        };
+
 
 
 
         render() {
             console.log(this.state.questions);
+
+            let newList = this.state.questions.map(function(index){
+                return <SubInput key={index.id}/>
+            });
+
             return <div className="all-forms">
                 <div className="form-box">
                     <div className="form-description">
@@ -44,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="text"
                                className="form-input"
                                ref={questionInput => this.questionInput = questionInput}/>
-                        <select name="Yes/No" className="form-input">
+                        <select name="Yes/No" className="form-input"
+                                ref={typeInput => this.typeInput = typeInput}>
                             <option value="Yes/No">Yes/No</option>
                             <option value="Text">Text</option>
                             <option value="Number">Number</option>
@@ -57,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </form>
                 </div>
-                <SubInput>
-                    <SubInput></SubInput>
-                </SubInput>
+            {newList}
             </div>;
         }
     }
@@ -67,6 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class SubInput extends React.Component {
 
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                subQuestions: []
+            };
+        }
+
+        handleAddNewSub = (e) => {
+            e.preventDefault();
+            const newData = {"question": this.questionInput.value};
+            this.setState({
+                subQuestions: [...this.state.subQuestions, newData]
+            })
+        };
 
         render() {
 
