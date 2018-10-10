@@ -18,14 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
         handleAddNew = (e) => {
 
             e.preventDefault();
-            const newData = {
-                "question": this.questionInput.value,
-                "type": this.typeInput.value, sublist: this.props.sublist
-            };
-            this.setState({
-                questions: [...this.state.questions, newData]
-            })
+
+            if(this.questionInput.value!=="") {
+                const newData = {
+                    "question": this.questionInput.value,
+                    "type": this.typeInput.value, sublist: this.props.sublist
+                };
+
+                this.setState({
+                    questions: [...this.state.questions, newData]
+                })
+            }
+            else{
+                alert("you must type in question!")
+            }
         };
+
+// TODO: przenieść przez props do rodzica i tam usunac, to samo dla sublisty
+        handleDelete =(index)=>{
+            index.preventDefault();
+           console.log(index)
+
+        }
 
 
         render() {
@@ -33,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let newList = this.state.questions.map(function (elem, index) {
 
-                return <SubInput key={index}/>
+                return <SubInput key={index} index={index} />
 
             });
 
@@ -57,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button
                                 onClick={this.handleAddNew}>Add Sub-Input
                             </button>
-                            <button>Delete</button>
+                            <button
+                                onClick={this.handleDelete}>Delete</button>
                         </div>
                     </form>
                 </div>
@@ -102,13 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Type</span>
                     </div>
                     <form className="form-inputs">
-                        <div className="condition">
-                            <select name="Equals" className="form-input">
+                        <div className="form-conditions">
+                            <select name="Equals" className="form-conditions-input">
                                 <option value="equals">Equals</option>
                                 <option value="greater">Greater than</option>
+                                <option value="less">Less than</option>
                             </select>
-                            <input type="text" className="form-input"
-                                   ref={questionInput => this.questionInput = questionInput}/>/>
+                            <input type="text" className="form-conditions-input"
+                                   ref={questionInput => this.questionInput = questionInput}/>
                         </div>
                         <input type="text" className="form-input"/>
                         <select name="Yes/No" className="form-input">
@@ -155,14 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let inputs = this.state.inputs.map(function (elem, index) {
 
-                return <li key={index}><Input/></li>
+                return <Input key={index}/>
 
             });
             return <div className="container">
                 <h3> Form Builder</h3>
-                <ul>
-                    {inputs}</ul>
-                <button className="AddInput"
+                    {inputs}
+                <button className="addInput"
                         onClick={this.handleAddnewInput}>Add Input
                 </button>
             </div>;
