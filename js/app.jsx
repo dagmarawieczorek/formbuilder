@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.state = {
                 questions: []
+
             };
         }
 
@@ -17,22 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
         handleAddNew = (e) => {
 
             e.preventDefault();
-            const newData = {"question": this.questionInput.value,
-            "type":this.typeInput.value};
+            const newData = {
+                "question": this.questionInput.value,
+                "type": this.typeInput.value, sublist: this.props.sublist
+            };
             this.setState({
                 questions: [...this.state.questions, newData]
             })
         };
 
 
-
-
-
         render() {
             console.log(this.state.questions);
 
-            let newList = this.state.questions.map(function(index){
-                return <SubInput key={index.id}/>
+            let newList = this.state.questions.map(function (elem, index) {
+
+                return <SubInput key={index}/>
+
             });
 
             return <div className="all-forms">
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </form>
                 </div>
-            {newList}
+                {newList}
             </div>;
         }
     }
@@ -78,12 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
         handleAddNewSub = (e) => {
             e.preventDefault();
             const newData = {"question": this.questionInput.value};
+
             this.setState({
                 subQuestions: [...this.state.subQuestions, newData]
             })
         };
 
-        render() {
+        render() {           console.log(this.state.subQuestions);
+
+            let newSubList = this.state.subQuestions.map(function (elem, index) {
+
+                return <SubInput key={index}/>
+
+            });
 
             return <div className="all-forms">
                 <div className="form-box ">
@@ -98,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <option value="equals">Equals</option>
                                 <option value="greater">Greater than</option>
                             </select>
-                            <input type="text" className="form-input"/>
+                            <input type="text" className="form-input"
+                                   ref={questionInput => this.questionInput = questionInput}/>/>
                         </div>
                         <input type="text" className="form-input"/>
                         <select name="Yes/No" className="form-input">
@@ -108,13 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         </select>
                         <div className="form-buttons">
                             <button
-                                onClick={this.props.handleAddNewSub}> Add Sub-Input
+                                onClick={this.handleAddNewSub}> Add Sub-Input
                             </button>
                             <button>Delete</button>
                         </div>
                     </form>
                 </div>
-                {this.props.children}
+                {newSubList}
             </div>;
 
         }
@@ -123,10 +133,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     class App extends React.Component {
-        render() {
-            return <div>
-                <Input/>
 
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                inputs: []
+            };
+        }
+
+        handleAddnewInput = (e) => {
+            e.preventDefault();
+            const newData = e;
+
+            this.setState({
+                inputs: [...this.state.inputs, newData]
+            })
+        };
+
+        render() {
+
+            let inputs = this.state.inputs.map(function (elem, index) {
+
+                return <li key={index}><Input/></li>
+
+            });
+            return <div className="container">
+                <h3> Form Builder</h3>
+                <ul>
+                    {inputs}</ul>
+                <button className="AddInput"
+                        onClick={this.handleAddnewInput}>Add Input
+                </button>
             </div>;
         }
     }
