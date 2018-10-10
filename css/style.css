@@ -1,0 +1,13 @@
+.form-box{
+    width: 800px;
+display: flex;
+flex-direction: row;
+    border: 1px solid;
+    padding:20px;
+}
+.form-description{
+    width: 200px;
+display: flex;
+flex-direction: column;
+
+}
