@@ -6,8 +6,7 @@ export default class Input extends React.Component {
         super(props);
 
         this.state = {
-            questions: []
-
+            data: this.props.data
         };
     }
 
@@ -15,13 +14,20 @@ export default class Input extends React.Component {
         e.preventDefault();
 
         if (this.questionInput.value !== "") {
+            this.state.data.question = this.questionInput.value;
+            this.state.data.type = this.typeInput.value;
+
             const newData = {
-                "question": this.questionInput.value,
-                "type": this.typeInput.value, sublist: this.props.sublist
+                "id": 100,
+                "question":"",
+                "type":"",
+                "condition":"",
+                "items": []
             };
 
+            this.state.data.items = [...this.state.data.items, newData];
             this.setState({
-                questions: [...this.state.questions, newData]
+
             })
         }
         else {
@@ -35,13 +41,13 @@ export default class Input extends React.Component {
     };
 
     render() {
-        console.log(this.state.questions);
+        console.log(this.state.data.items);
 
-        let newList = this.state.questions.map(function (elem, i) {
-
-            return <SubInput key={i} index={i}/>
-
+        let newList = this.state.data.items.map((elem, i)=> {
+            return <SubInput key={i} index={i} data={elem}
+                          deleteInput={this.handleDeleteInput}/>
         });
+
 
         return <div className="all-forms">
             <div className="form-box">

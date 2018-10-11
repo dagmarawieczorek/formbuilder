@@ -7,26 +7,30 @@ class SubInput extends React.Component {
         super(props);
 
         this.state = {
-            subQuestions: []
+            data: this.props.data
         };
     }
 
     handleAddNewSub = (e) => {
         e.preventDefault();
-        const newData = {"question": this.questionInput.value};
+        const newData = {
+            "id": 100,
+            "question": "",
+            "type": "",
+            "condition": "",
+            "items": []
+        };
 
-        this.setState({
-            subQuestions: [...this.state.subQuestions, newData]
-        })
+        this.state.data.question = this.questionInput.value;
+        this.state.data.items = [...this.state.data.items, newData];
+        this.setState({});
     };
 
     render() {
-        console.log(this.state.subQuestions);
+        console.log(this.state.data.items);
 
-        let newSubList = this.state.subQuestions.map(function (elem, index) {
-
-            return <SubInput key={index}/>
-
+        let newSubList = this.state.data.items.map(function (elem, index) {
+            return <SubInput key={index} data={elem}/>
         });
 
         return <div className="all-forms">

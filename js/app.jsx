@@ -26,18 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         handleAddnewInput = (e, i) => {
             e.preventDefault();
-            const newData = e;
+            const newData = {
+                "id": i,
+                "question":"",
+                "type":"",
+                "condition":"",
+                "items": []
+            };
 
             this.setState({
                 inputs: [...this.state.inputs, newData]
             })
         };
 
+        handleRenderJson = (e) => {
+            e.preventDefault();
+            console.log(this.state.inputs);
+        };
+
         render() {
             console.log(this.state.inputs);
             let inputs = this.state.inputs.map((elem, i)=> {
 
-                return <Input key={i} index={i}
+                return <Input key={i} index={i} data={elem}
                 deleteInput={this.handleDeleteInput}/>
             });
 
@@ -46,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 {inputs}
                 <button className="addInput"
                         onClick={this.handleAddnewInput}>Add Input
+                </button>
+                <button className="addInput"
+                        onClick={this.handleRenderJson}>Render JSON
                 </button>
             </div>;
         }
