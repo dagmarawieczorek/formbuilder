@@ -6,7 +6,8 @@ export default class Input extends React.Component {
         super(props);
 
         this.state = {
-            data: this.props.data
+            data: this.props.data,
+            question: "",
         };
     }
 
@@ -19,7 +20,7 @@ export default class Input extends React.Component {
 
             const newData = {
                 "id": 100,
-                "question":"",
+                "question":this.state.question,
                 "type":"",
                 "condition":"",
                 "items": []
@@ -27,6 +28,7 @@ export default class Input extends React.Component {
 
             this.state.data.items = [...this.state.data.items, newData];
             this.setState({
+
 
             })
         }
@@ -39,6 +41,8 @@ export default class Input extends React.Component {
         e.preventDefault();
         this.props.deleteInput(this.props.index);
     };
+
+
 
     render() {
         console.log(this.state.data.items);
@@ -58,7 +62,7 @@ export default class Input extends React.Component {
                 <form className="form-inputs">
                     <input type="text"
                            className="form-input"
-                           ref={questionInput => this.questionInput = questionInput}/>
+                         value={questionInput.value}/>
                     <select name="Yes/No" className="form-input"
                             ref={typeInput => this.typeInput = typeInput}>
                         <option value="Yes/No">Yes/No</option>
