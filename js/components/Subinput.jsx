@@ -67,7 +67,6 @@ class SubInput extends React.Component {
 
 
     render() {
-        console.log(this.state.data.items);
 
         let newSubList = this.state.data.items.map((elem, i)=> {
             return <SubInput key={i} index={i} data={elem}
