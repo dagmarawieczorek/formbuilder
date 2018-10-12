@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "Stwórz w pełni działające środowisko, które pozwoli Ci pisać pliki JSX, skompilować je do plików JS i uruchomić działającą aplikację React.",
   "main": "webpack.config.js",
+  "homepage": "https://dagmarawieczorek.github.io/formbuilder/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
+
   "license": "ISC",
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "react": "^15.4.0",
     "react-dom": "^15.4.0"
   },
