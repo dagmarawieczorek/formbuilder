@@ -6,27 +6,26 @@ export default class Input extends React.Component {
         super(props);
 
         this.state = {
-            data: this.props.data
+            data: this.props.data,
         };
     }
 
     handleAddNew = (e) => {
         e.preventDefault();
 
-        if (this.questionInput.value !== "") {
-            this.state.data.question = this.questionInput.value;
-            this.state.data.type = this.typeInput.value;
-
+        if (this.state.data.question!== "") {
             const newData = {
                 "id": 100,
-                "question":"",
+                "question": "",
                 "type":"",
-                "condition":"",
+                "condition":"equals",
+                "conditionInput":"",
                 "items": []
             };
 
             this.state.data.items = [...this.state.data.items, newData];
             this.setState({
+
 
             })
         }
@@ -39,6 +38,24 @@ export default class Input extends React.Component {
         e.preventDefault();
         this.props.deleteInput(this.props.index);
     };
+
+    handleQuestionChange=(event)=>{
+        this.state.data.question= event.target.value;
+        this.setState({
+
+        })
+    };
+
+
+    handleTypeChange=(event)=>{
+
+        this.state.data.type= event.target.value;
+        this.setState({
+
+        })
+    };
+
+
 
     render() {
         console.log(this.state.data.items);
@@ -56,11 +73,16 @@ export default class Input extends React.Component {
                     <span>Type</span>
                 </div>
                 <form className="form-inputs">
+
                     <input type="text"
                            className="form-input"
-                           ref={questionInput => this.questionInput = questionInput}/>
+                         value={this.state.data.question}
+                    onChange={this.handleQuestionChange}/>
                     <select name="Yes/No" className="form-input"
-                            ref={typeInput => this.typeInput = typeInput}>
+                            ref={typeInput => this.typeInput = typeInput}
+                    onChange={this.handleTypeChange}
+                            value={this.state.data.type}
+                    >
                         <option value="Yes/No">Yes/No</option>
                         <option value="Text">Text</option>
                         <option value="Number">Number</option>

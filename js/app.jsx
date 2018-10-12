@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newData = {
                 "id": i,
                 "question":"",
-                "type":"",
-                "condition":"",
+                "type":"Yes/No",
                 "items": []
             };
 
@@ -46,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         render() {
             console.log(this.state.inputs);
+
             let inputs = this.state.inputs.map((elem, i)=> {
 
                 return <Input key={i} index={i} data={elem}

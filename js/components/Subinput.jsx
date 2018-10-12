@@ -13,18 +13,63 @@ class SubInput extends React.Component {
 
     handleAddNewSub = (e) => {
         e.preventDefault();
-        const newData = {
-            "id": 100,
-            "question": "",
-            "type": "",
-            "condition": "",
-            "items": []
-        };
 
-        this.state.data.question = this.questionInput.value;
-        this.state.data.items = [...this.state.data.items, newData];
-        this.setState({});
+        if (this.state.data.question!== "") {
+            const newData = {
+                "id": 100,
+                "question": "",
+                "type":"",
+                "condition":"",
+                "items": []
+            };
+
+            this.state.data.items = [...this.state.data.items, newData];
+            this.setState({
+
+
+            })
+        }
+        else {
+            alert("you must type in question!")
+        }
     };
+
+    handleDelete = (e) => {
+        e.preventDefault();
+        this.props.deleteInput(this.props.index);
+    };
+
+    handleSubquestionChange=(event)=>{
+        this.state.data.question= event.target.value;
+        this.setState({
+
+        })
+    };
+
+
+    handleTypeChange=(event)=>{
+
+        this.state.data.type= event.target.value;
+        this.setState({
+
+        })
+    };
+
+
+    handleConditionChange=(event)=>{
+        this.state.data.condition= event.target.value;
+        this.setState({
+
+        })
+    };
+
+    handleConditionInputChange=(event)=>{
+        this.state.data.conditionInput= event.target.value;
+        this.setState({
+
+        })
+    };
+
 
     render() {
         console.log(this.state.data.items);
@@ -40,18 +85,31 @@ class SubInput extends React.Component {
                     <span> Question</span>
                     <span>Type</span>
                 </div>
+
                 <form className="form-inputs">
                     <div className="form-conditions">
-                        <select name="Equals" className="form-conditions-input">
+                        <select name="conditions" className="form-conditions-input"
+                                onChange={this.handleConditionChange}
+                                value={this.state.data.condition}
+                        >
                             <option value="equals">Equals</option>
                             <option value="greater">Greater than</option>
                             <option value="less">Less than</option>
                         </select>
                         <input type="text" className="form-conditions-input"
-                               ref={questionInput => this.questionInput = questionInput}/>
+                               value={this.state.data.conditionInput}
+                               onChange={this.handleConditionInputChange}
+                        />
                     </div>
-                    <input type="text" className="form-input"/>
-                    <select name="Yes/No" className="form-input">
+                    <input type="text"
+                           className="form-input"
+                           value={this.state.data.question}
+                           onChange={this.handleSubquestionChange}/>
+
+                    <select name="Yes/No" className="form-input"
+                            onChange={this.handleTypeChange}
+                            value={this.state.data.type}
+                    >
                         <option value="Yes/No">Yes/No</option>
                         <option value="Text">Text</option>
                         <option value="Number">Number</option>
