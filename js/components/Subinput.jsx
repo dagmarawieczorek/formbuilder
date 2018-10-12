@@ -14,23 +14,19 @@ class SubInput extends React.Component {
     handleAddNewSub = (e) => {
         e.preventDefault();
 
-        if (this.state.data.question!== "") {
+        if (this.state.data.question !== ""&& this.state.data.conditionInput) {
             const newData = {
-                "id": 100,
                 "question": "",
-                "type":"",
-                "condition":"",
+                "type": "radio",
+                "condition": "",
                 "items": []
             };
 
             this.state.data.items = [...this.state.data.items, newData];
-            this.setState({
-
-
-            })
+            this.setState({})
         }
         else {
-            alert("you must type in question!")
+            alert("you must fill all the inputs")
         }
     };
 
@@ -39,42 +35,43 @@ class SubInput extends React.Component {
         this.props.deleteSubinput(this.props.index);
     };
 
-    handleSubquestionChange=(event)=>{
-        this.state.data.question= event.target.value;
-        this.setState({
+    handleDeleteSubinput = (elem, i) => {
+        let arr = this.state.data.items;
+        arr.splice(i, 1);
+        this.state.data.items = arr;
+        this.setState({})
+    }
 
-        })
+    handleSubquestionChange = (event) => {
+        this.state.data.question = event.target.value;
+        this.setState({})
     };
 
 
-    handleTypeChange=(event)=>{
+    handleTypeChange = (event) => {
 
-        this.state.data.type= event.target.value;
-        this.setState({
-
-        })
+        this.state.data.type = event.target.value;
+        this.setState({})
     };
 
 
-    handleConditionChange=(event)=>{
-        this.state.data.condition= event.target.value;
-        this.setState({
-
-        })
+    handleConditionChange = (event) => {
+        this.state.data.condition = event.target.value;
+        this.setState({})
     };
 
-    handleConditionInputChange=(event)=>{
-        this.state.data.conditionInput= event.target.value;
-        this.setState({
-
-        })
+    handleConditionInputChange = (event) => {
+        this.state.data.conditionInput = event.target.value;
+        this.setState({})
     };
 
 
     render() {
+        console.log(this.state.data.items);
 
-        let newSubList = this.state.data.items.map(function (elem, index) {
-            return <SubInput key={index} data={elem} />
+        let newSubList = this.state.data.items.map((elem, i)=> {
+            return <SubInput key={i} index={i} data={elem}
+                             deleteSubinput={this.handleDeleteSubinput}/>
         });
 
         return <div className="all-forms">
@@ -105,11 +102,11 @@ class SubInput extends React.Component {
                            value={this.state.data.question}
                            onChange={this.handleSubquestionChange}/>
 
-                    <select name="Yes/No" className="form-input"
+                    <select name="type" className="form-input"
                             onChange={this.handleTypeChange}
                             value={this.state.data.type}
                     >
-                        <option value="Yes/No">Yes/No</option>
+                        <option value="radio">Yes/No</option>
                         <option value="Text">Text</option>
                         <option value="Number">Number</option>
                     </select>
@@ -118,7 +115,8 @@ class SubInput extends React.Component {
                             onClick={this.handleAddNewSub}> Add Sub-Input
                         </button>
                         <button
-                        onClick={this.handleDelete}>Delete</button>
+                            onClick={this.handleDelete}>Delete
+                        </button>
                     </div>
                 </form>
             </div>

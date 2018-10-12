@@ -15,9 +15,8 @@ export default class Input extends React.Component {
 
         if (this.state.data.question!== "") {
             const newData = {
-                "id": 100,
                 "question": "",
-                "type":"",
+                "type":"radio",
                 "condition":"equals",
                 "conditionInput":"",
                 "items": []
@@ -88,7 +87,7 @@ export default class Input extends React.Component {
                     onChange={this.handleTypeChange}
                             value={this.state.data.type}
                     >
-                        <option value="Yes/No">Yes/No</option>
+                        <option value="radio">Yes/No</option>
                         <option value="Text">Text</option>
                         <option value="Number">Number</option>
                     </select>

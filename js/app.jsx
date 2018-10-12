@@ -27,9 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         handleAddnewInput = (e, i) => {
             e.preventDefault();
             const newData = {
-                "id": i,
                 "question":"",
-                "type":"Yes/No",
+                "type":"radio",
                 "items": []
             };
 
