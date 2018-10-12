@@ -7,7 +7,6 @@ export default class Input extends React.Component {
 
         this.state = {
             data: this.props.data,
-            question: "",
         };
     }
 
@@ -19,7 +18,8 @@ export default class Input extends React.Component {
                 "id": 100,
                 "question": "",
                 "type":"",
-                "condition":"",
+                "condition":"equals",
+                "conditionInput":"",
                 "items": []
             };
 
@@ -44,7 +44,7 @@ export default class Input extends React.Component {
         this.setState({
 
         })
-    }
+    };
 
 
     handleTypeChange=(event)=>{
@@ -53,7 +53,7 @@ export default class Input extends React.Component {
         this.setState({
 
         })
-    }
+    };
 
 
 
@@ -73,6 +73,7 @@ export default class Input extends React.Component {
                     <span>Type</span>
                 </div>
                 <form className="form-inputs">
+
                     <input type="text"
                            className="form-input"
                          value={this.state.data.question}
