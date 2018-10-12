@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         handleAddnewInput = (e, i) => {
             e.preventDefault();
             const newData = {
-                "question":"",
-                "type":"radio",
+                "question": "",
+                "type": "radio",
                 "items": []
             };
 
@@ -39,17 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         handleRenderJson = (e) => {
             e.preventDefault();
-            console.log(this.state.inputs);
+            console.log(this.state.inputs)
         };
 
         render() {
-            console.log(this.state.inputs);
 
-            let inputs = this.state.inputs.map((elem, i)=> {
+
+            let inputs = this.state.inputs.map((elem, i) => {
 
                 return <Input key={i} index={i} data={elem}
-                deleteInput={this.handleDeleteInput}/>
+                              deleteInput={this.handleDeleteInput}/>
             });
+
 
             return <div className="container">
                 <h3> Form Builder</h3>

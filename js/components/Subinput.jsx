@@ -14,11 +14,12 @@ class SubInput extends React.Component {
     handleAddNewSub = (e) => {
         e.preventDefault();
 
-        if (this.state.data.question !== ""&& this.state.data.conditionInput) {
+        if (this.state.data.question !== "" && this.state.data.conditionInput) {
             const newData = {
                 "question": "",
                 "type": "radio",
                 "condition": "",
+                "conditionInput": "",
                 "items": []
             };
 
@@ -67,9 +68,8 @@ class SubInput extends React.Component {
 
 
     render() {
-        console.log(this.state.data.items);
 
-        let newSubList = this.state.data.items.map((elem, i)=> {
+        let newSubList = this.state.data.items.map((elem, i) => {
             return <SubInput key={i} index={i} data={elem}
                              deleteSubinput={this.handleDeleteSubinput}/>
         });
