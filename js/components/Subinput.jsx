@@ -36,7 +36,7 @@ class SubInput extends React.Component {
 
     handleDelete = (e) => {
         e.preventDefault();
-        this.props.deleteInput(this.props.index);
+        this.props.deleteSubinput(this.props.index);
     };
 
     handleSubquestionChange=(event)=>{
@@ -72,10 +72,9 @@ class SubInput extends React.Component {
 
 
     render() {
-        console.log(this.state.data.items);
 
         let newSubList = this.state.data.items.map(function (elem, index) {
-            return <SubInput key={index} data={elem}/>
+            return <SubInput key={index} data={elem} />
         });
 
         return <div className="all-forms">
@@ -118,7 +117,8 @@ class SubInput extends React.Component {
                         <button
                             onClick={this.handleAddNewSub}> Add Sub-Input
                         </button>
-                        <button>Delete</button>
+                        <button
+                        onClick={this.handleDelete}>Delete</button>
                     </div>
                 </form>
             </div>

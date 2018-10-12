@@ -47,6 +47,13 @@ export default class Input extends React.Component {
     };
 
 
+    handleDeleteSubinput = (elem, i) => {
+        let arr = this.state.data.items;
+        arr.splice(i, 1);
+        this.setState({
+            inputs: arr
+        })
+    }
     handleTypeChange=(event)=>{
 
         this.state.data.type= event.target.value;
@@ -58,11 +65,9 @@ export default class Input extends React.Component {
 
 
     render() {
-        console.log(this.state.data.items);
-
-        let newList = this.state.data.items.map((elem, i)=> {
+             let newList = this.state.data.items.map((elem, i)=> {
             return <SubInput key={i} index={i} data={elem}
-                          deleteInput={this.handleDeleteInput}/>
+                             deleteSubinput={this.handleDeleteSubinput}/>
         });
 
 
