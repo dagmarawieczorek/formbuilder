@@ -7,6 +7,7 @@ You can add and delete everything to modify the structure
 
 
 `npm i`
+
  ` npx webpack`
  
  
