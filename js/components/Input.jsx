@@ -14,13 +14,10 @@ export default class Input extends React.Component {
     handleAddNew = (e) => {
         e.preventDefault();
 
-        if (this.questionInput.value !== "") {
-            this.state.data.question = this.questionInput.value;
-            this.state.data.type = this.typeInput.value;
-
+        if (this.state.data.question!== "") {
             const newData = {
                 "id": 100,
-                "question":this.state.question,
+                "question": "",
                 "type":"",
                 "condition":"",
                 "items": []
@@ -42,6 +39,22 @@ export default class Input extends React.Component {
         this.props.deleteInput(this.props.index);
     };
 
+    handleQuestionChange=(event)=>{
+        this.state.data.question= event.target.value;
+        this.setState({
+
+        })
+    }
+
+
+    handleTypeChange=(event)=>{
+
+        this.state.data.type= event.target.value;
+        this.setState({
+
+        })
+    }
+
 
 
     render() {
@@ -62,9 +75,13 @@ export default class Input extends React.Component {
                 <form className="form-inputs">
                     <input type="text"
                            className="form-input"
-                         value={questionInput.value}/>
+                         value={this.state.data.question}
+                    onChange={this.handleQuestionChange}/>
                     <select name="Yes/No" className="form-input"
-                            ref={typeInput => this.typeInput = typeInput}>
+                            ref={typeInput => this.typeInput = typeInput}
+                    onChange={this.handleTypeChange}
+                            value={this.state.data.type}
+                    >
                         <option value="Yes/No">Yes/No</option>
                         <option value="Text">Text</option>
                         <option value="Number">Number</option>
