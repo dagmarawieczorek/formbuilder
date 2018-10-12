@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         handleAddnewInput = (e, i) => {
             e.preventDefault();
             const newData = {
-                "question":"",
-                "type":"radio",
+                "question": "",
+                "type": "radio",
                 "items": []
             };
 
@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
         render() {
 
 
-            let inputs = this.state.inputs.map((elem, i)=> {
+            let inputs = this.state.inputs.map((elem, i) => {
 
                 return <Input key={i} index={i} data={elem}
-                deleteInput={this.handleDeleteInput}/>
+                              deleteInput={this.handleDeleteInput}/>
             });
 
 
