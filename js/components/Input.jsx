@@ -13,17 +13,20 @@ export default class Input extends React.Component {
     handleAddNew = (e) => {
         e.preventDefault();
 
-        if (this.state.data.question !== "") {
+        if (this.state.data.question!== "") {
             const newData = {
                 "question": "",
-                "type": "radio",
-                "condition": "equals",
-                "conditionInput": "",
+                "type":"radio",
+                "condition":"equals",
+                "conditionInput":"",
                 "items": []
             };
 
             this.state.data.items = [...this.state.data.items, newData];
-            this.setState({})
+            this.setState({
+
+
+            })
         }
         else {
             alert("you must type in question!")
@@ -35,9 +38,11 @@ export default class Input extends React.Component {
         this.props.deleteInput(this.props.index);
     };
 
-    handleQuestionChange = (event) => {
-        this.state.data.question = event.target.value;
-        this.setState({})
+    handleQuestionChange=(event)=>{
+        this.state.data.question= event.target.value;
+        this.setState({
+
+        })
     };
 
 
@@ -48,15 +53,18 @@ export default class Input extends React.Component {
             inputs: arr
         })
     }
-    handleTypeChange = (event) => {
+    handleTypeChange=(event)=>{
 
-        this.state.data.type = event.target.value;
-        this.setState({})
+        this.state.data.type= event.target.value;
+        this.setState({
+
+        })
     };
 
 
+
     render() {
-        let newList = this.state.data.items.map((elem, i) => {
+             let newList = this.state.data.items.map((elem, i)=> {
             return <SubInput key={i} index={i} data={elem}
                              deleteSubinput={this.handleDeleteSubinput}/>
         });
@@ -72,11 +80,11 @@ export default class Input extends React.Component {
 
                     <input type="text"
                            className="form-input"
-                           value={this.state.data.question}
-                           onChange={this.handleQuestionChange}/>
+                         value={this.state.data.question}
+                    onChange={this.handleQuestionChange}/>
                     <select name="Yes/No" className="form-input"
                             ref={typeInput => this.typeInput = typeInput}
-                            onChange={this.handleTypeChange}
+                    onChange={this.handleTypeChange}
                             value={this.state.data.type}
                     >
                         <option value="radio">Yes/No</option>
